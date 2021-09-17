@@ -6,6 +6,8 @@ const morgan = require("morgan");
 
 const app = express();
 
+const dappsRouter = require("./resources/dapps/router");
+
 /* SETUP MIDDLEWARE */
 
 app.disable("x-powered-by");
@@ -16,6 +18,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
 /* SETUP ROUTES */
+
+app.use("/dapps", dappsRouter);
 
 app.get("*", (req, res) => {
   res.json({ ok: true });
