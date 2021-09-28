@@ -11,13 +11,31 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Dapps {
- id               Int        @id @default(autoincrement())
- dappslug         String
- name             String
- full_description String
- website_url      String
- image            String
- number_of_nfts   Int
+model Trade {
+id                    Int @id @default(autoincrement())
+userId                Int  
+user                  User @relation(fields: [userId], references: [id])
+nftId                 String 
+nft                   NftArt @relation(fields: [nftId], references: [nftUuId])
+purchasePrice         Float
+type                  String // buy or sell (both post requests)
 }
 
+model User {
+id                    Int        @id @default(autoincrement())
+trades                Trade[]  
+firstName             String
+lastName              String
+email                 String
+walledAddress         String
+}
+
+model NftArt {
+id                   Int        @id @default(autoincrement())
+name                 String
+price                Float
+description          String
+url                  String
+nftUuId              String @unique
+trade                Trade?
+}

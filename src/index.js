@@ -6,7 +6,9 @@ const morgan = require("morgan");
 
 const app = express();
 
-const dappsRouter = require("./resources/dapps/router");
+const tradeRouter = require("./resources/Trade/router.js");
+const userRouter = require("./resources/User/router.js");
+const nftArtRouter = require("./resources/NftArt/router");
 
 /* SETUP MIDDLEWARE */
 
@@ -19,7 +21,9 @@ app.use(morgan("dev"));
 
 /* SETUP ROUTES */
 
-app.use("/dapps", dappsRouter);
+app.use("/user", userRouter);
+app.use("/trade", tradeRouter);
+app.use("/nftArt", nftArtRouter);
 
 app.get("*", (req, res) => {
   res.json({ ok: true });
