@@ -13,7 +13,9 @@ function tradeNft(req, res) {
     })
     .catch((error) => {
       console.log(error);
-      res.json({ msg: "...your buy nft just blew up" });
+      res.json({
+        msg: "The NFT has already been sold - please try another - NFT's are uploaded weekly",
+      });
     });
 }
 
